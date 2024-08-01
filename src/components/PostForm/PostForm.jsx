@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react'
+import React, { useCallback, useEffect } from 'react'
 import {useForm} from 'react-hook-form'
 import {Button, Input, Select} from '../index'
 import appwriteService from '../../appwrite/config'
@@ -52,6 +52,18 @@ function PostForm({post}) {
             .replace(/^[a-zA-Z\d\s]+/g, '-')
             .replace(/\s/g, '-')
     }, [])
+
+    useEffect(() => {
+        const subcription = watch((value, {name}) => {
+            if (name === "title") {
+                setValue('slug', slugTransform(value.title, {shouldValidate: true}));
+            }
+        })
+
+        return () => {
+            subcription.unsubscribe();
+        }
+    }, [watch, slugTransform, setValue]);
 
   return (
     <div>PostForm</div>
