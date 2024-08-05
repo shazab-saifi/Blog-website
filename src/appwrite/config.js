@@ -1,4 +1,4 @@
-import conf from "../conf/conf";
+import conf from "../conf/conf.js";
 import {Client, ID, Databases, Storage, Query} from 'appwrite'
 
 export class Service {
@@ -9,8 +9,8 @@ export class Service {
 
     constructor() {
         this.client
-                   .setEndpoint(conf.appwriteUrl)
-                   .setProject(conf.appwriteProjectId);
+        .setEndpoint(conf.appwriteUrl)
+        .setProject(conf.appwriteProjectId);
         this.databases = new Databases(this.client);
         this.bucket = new Storage(this.client);
     }
@@ -35,7 +35,7 @@ export class Service {
                 conf.appwriteCollectionId,
                 slug,
                 {title, content, featuredImage, status}
-            );
+            )
         } catch (error) {
             console.log("Appwrite service :: updatePost :: error", error);
         }
@@ -47,7 +47,7 @@ export class Service {
                 conf.appwriteDatabaseId,
                 conf.appwriteCollectionId,
                 slug
-            );
+            )
             return true;
         } catch (error) {
             console.log("Appwrite service :: deletePost :: error", error);
@@ -61,7 +61,7 @@ export class Service {
                 conf.appwriteDatabaseId,
                 conf.appwriteCollectionId,
                 slug
-            );
+            )
         } catch (error) {
             console.log("Appwrite service :: getPost :: error", error);
             return false;
@@ -87,7 +87,7 @@ export class Service {
                 conf.appwriteBucketId,
                 ID.unique(),
                 file
-            );
+            )
         } catch (error) {
             console.log("Appwrite service :: uploadFile :: error", error);
             return false
@@ -99,7 +99,7 @@ export class Service {
             await this.bucket.deleteFile(
                 conf.appwriteBucketId,
                 fileId
-            );
+            )
             return true;
         } catch (error) {
             console.log("Appwrite service :: deleteFile :: error", error);

@@ -9,7 +9,7 @@ function Home() {
     useEffect(() => {
         appwriteService.getPosts().then((posts) => {
             if (posts) {
-                setPosts(posts);
+                setPosts(posts.documents);
             }
         })
     }, []);
